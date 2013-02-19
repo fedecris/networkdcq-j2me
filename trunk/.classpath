@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="org.elipse.mtj.JavaMEContainer/Samsung SDK 1.2.2 for the Java(TM) ME Platform/GT-S3370"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
