@@ -1,7 +1,5 @@
 package networkdcq.communication;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -25,16 +23,14 @@ public class TCPNetwork extends TCPCommunication {
     protected int port;     
 
     /** Client socket */
-    protected SocketConnection socket; //Socket socket;
+    protected SocketConnection socket; 
     /** Server socket */
-    protected ServerSocketConnection serverConn; //ServerSocket serverConn;
+    protected ServerSocketConnection serverConn; 
     
-    /** Buffer for writing objects */
-    protected OutputStream toBuffer = null; //ObjectOutputStream toBuffer = null;    
-    protected DataOutputStream dataOutputStream;
-    /** Buffer for reading objects */
-    protected InputStream fromBuffer = null; //ObjectInputStream fromBuffer = null;
-    protected DataInputStream dataInputStream;
+    /** Buffer for writing data */
+    protected OutputStream toBuffer = null;     
+    /** Buffer for reading data */
+    protected InputStream fromBuffer = null; 
 
 	/**
      * Writes an object to the stream
@@ -44,9 +40,8 @@ public class TCPNetwork extends TCPCommunication {
     public void write(NetworkApplicationData data) throws IOException {
         try {
         	
-        	dataOutputStream.write((data.networkSerialize()).getBytes()); //toBuffer.writeObject(data);
-        	dataOutputStream.flush(); //toBuffer.flush();
-        	//toBuffer.reset();
+        	toBuffer.write((data.networkSerialize()).getBytes()); //toBuffer.writeObject(data);
+        	toBuffer.flush(); 
         }
         catch (Exception ex) { 
         	Logger.w("Exception writing object:" + ex.getMessage());
@@ -67,7 +62,7 @@ public class TCPNetwork extends TCPCommunication {
 			int corte = NetworkApplicationData.VARIABLE_END_OF_VARIABLES.charAt(0);
 			StringBuffer sb = new StringBuffer();
 		    // se lee hasta el caracter de fin (es un String pero por ahora asumo que es de tamaño 1) <-------
-			while ((inputChar = dataInputStream.read()) != corte)
+			while ((inputChar = fromBuffer.read()) != corte)
 		      sb.append((char)inputChar);
 
 			// agrego el ultimo caracter (corte) 

@@ -1,14 +1,11 @@
 package networkdcq.communication;
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.microedition.io.SocketConnection;
-
 
 import networkdcq.Host;
 import networkdcq.NetworkDCQ;
@@ -20,10 +17,7 @@ public class TCPServer extends TCPListener implements Runnable {
 	/**
 	 * Constructor
 	 */
-	//public TCPServer(Socket socket, ObjectInputStream fromBuffer, ObjectOutputStream toBuffer) {
-	public TCPServer(SocketConnection socket, InputStream fromBuffer, OutputStream toBuffer, 
-					 DataInputStream dataInputStream, DataOutputStream dataOutputStream) {	
-		//Logger.i("Creating connection to: " + socket.getInetAddress());
+	public TCPServer(SocketConnection socket, InputStream fromBuffer, OutputStream toBuffer) {	
 		try {
 			Logger.i("Creating connection to: " + socket.getLocalAddress());
 		} catch (IOException e) {
@@ -33,8 +27,6 @@ public class TCPServer extends TCPListener implements Runnable {
 		this.socket = socket;
 		this.fromBuffer = fromBuffer;
 		this.toBuffer = toBuffer;
-		this.dataInputStream = dataInputStream;
-		this.dataOutputStream = dataOutputStream;		
 	}
 
 	

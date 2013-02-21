@@ -1,8 +1,5 @@
 package networkdcq.communication;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-
 import javax.microedition.io.Connector;
 import javax.microedition.io.SocketConnection;
 
@@ -33,14 +30,9 @@ public class TCPClient extends TCPNetwork {
     public boolean connect() {
     	Logger.i("Connecting to:" + host);
         try {            
-        	//socket = new Socket(host, port);
-        	SocketConnection socket = (SocketConnection) Connector.open("socket://" + host + ":" + port);             
-            //toBuffer = new ObjectOutputStream(socket.getOutputStream());
+        	SocketConnection socket = (SocketConnection) Connector.open("socket://" + host + ":" + port);
             toBuffer = socket.openOutputStream();
-            dataOutputStream = new DataOutputStream(toBuffer);            
-            //fromBuffer = new ObjectInputStream(socket.getInputStream());
 			fromBuffer = socket.openInputStream();
-			dataInputStream = new DataInputStream(fromBuffer);			
             connected = true;
         }
         catch (Exception ex) { 
